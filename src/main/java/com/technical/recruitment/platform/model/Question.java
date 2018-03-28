@@ -1,19 +1,30 @@
 package com.technical.recruitment.platform.model;
 
+import sun.plugin2.message.Message;
+
 public abstract class Question {
 
     private int id;
+    private int number;
     private String title;
     private String body;
     private QuestionType type;
-    private double score;
+    private Response response;
 
-    public double getScore() {
-        return score;
+    public int getNumber() {
+        return number;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public Response getResponse() {
+        return response;
+    }
+
+    public void setResponse(Response message) {
+        this.response = message;
     }
 
     public int getId() {

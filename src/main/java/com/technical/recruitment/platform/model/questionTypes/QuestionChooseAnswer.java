@@ -2,24 +2,35 @@ package com.technical.recruitment.platform.model.questionTypes;
 
 import com.technical.recruitment.platform.model.Question;
 
+import java.util.List;
+
 public class QuestionChooseAnswer extends Question {
 
-    private int correctAnswerId;
-    private int userAnswerId;
+    private List<String> possibleAnswers;
+    private int correctAnswer;
+    private int userAnswer;
 
-    public int getCorrectAnswerId() {
-        return correctAnswerId;
+    public List<String> getPossibleAnswers() {
+        return possibleAnswers;
     }
 
-    public void setCorrectAnswerId(int correctAnswerId) {
-        this.correctAnswerId = correctAnswerId;
+    public void setPossibleAnswers(List<String> possibleAnswers) {
+        this.possibleAnswers = possibleAnswers;
     }
 
-    public int getUserAnswerId() {
-        return userAnswerId;
+    public int getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setUserAnswerId(int userAnswerId) {
-        this.userAnswerId = userAnswerId;
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public int getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(int userAnswer) {
+        this.userAnswer = userAnswer;
     }
 }
