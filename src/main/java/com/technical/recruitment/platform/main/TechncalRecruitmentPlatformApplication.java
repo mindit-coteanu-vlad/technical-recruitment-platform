@@ -1,5 +1,7 @@
 package com.technical.recruitment.platform.main;
 
+import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -18,8 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 public class TechncalRecruitmentPlatformApplication {
 
-
     public static void main(String[] args) {
+
         SpringApplication.run(TechncalRecruitmentPlatformApplication.class, args);
     }
 

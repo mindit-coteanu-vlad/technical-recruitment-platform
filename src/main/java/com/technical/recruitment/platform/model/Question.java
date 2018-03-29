@@ -1,7 +1,5 @@
 package com.technical.recruitment.platform.model;
 
-import sun.plugin2.message.Message;
-
 public abstract class Question {
 
     private int id;
