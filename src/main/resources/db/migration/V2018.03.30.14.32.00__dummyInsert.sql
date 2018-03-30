@@ -5,7 +5,7 @@ DELETE from INTERVIEWS;
 
 INSERT INTO interview_status VALUES (
 	1,
-     NOT_STARTED
+     'NOT_STARTED'
 );
 
 INSERT INTO INTERVIEWS VALUES(
@@ -17,13 +17,13 @@ INSERT INTO INTERVIEWS VALUES(
 
 INSERT INTO user_roles VALUES (
 	1,
-     CANDIDATE
+     'CANDIDATE'
 );
 
 INSERT INTO USERS VALUES (
 	12,
-     12avc3 ,
-     Coteanu Vlad ,
-     parola ,
+     '12avc3' ,
+     'Coteanu Vlad' ,
+     'parola' ,
     1
 )
