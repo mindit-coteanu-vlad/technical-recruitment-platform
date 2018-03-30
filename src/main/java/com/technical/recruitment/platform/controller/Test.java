@@ -1,6 +1,5 @@
 package com.technical.recruitment.platform.controller;
 
-import com.technical.recruitment.platform.model.Response;
 import com.technical.recruitment.platform.model.questionTypes.QuestionChooseAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteCode;

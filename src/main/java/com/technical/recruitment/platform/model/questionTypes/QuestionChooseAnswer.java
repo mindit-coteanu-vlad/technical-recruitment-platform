@@ -8,7 +8,6 @@ public class QuestionChooseAnswer extends Question {
 
     private List<String> possibleAnswers;
     private int correctAnswer;
-    private int userAnswer;
 
     public List<String> getPossibleAnswers() {
         return possibleAnswers;
@@ -26,11 +25,4 @@ public class QuestionChooseAnswer extends Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public int getUserAnswer() {
-        return userAnswer;
-    }
-
-    public void setUserAnswer(int userAnswer) {
-        this.userAnswer = userAnswer;
-    }
 }

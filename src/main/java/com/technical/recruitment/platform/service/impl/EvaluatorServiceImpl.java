@@ -1,8 +1,8 @@
 package com.technical.recruitment.platform.service.impl;
 
+import com.technical.recruitment.platform.model.Answer;
 import com.technical.recruitment.platform.model.Interview;
 import com.technical.recruitment.platform.model.Question;
-import com.technical.recruitment.platform.model.Response;
 import com.technical.recruitment.platform.model.questionTypes.QuestionChooseAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteCode;
@@ -34,13 +34,13 @@ public class EvaluatorServiceImpl implements EvaluatorService {
             logger.info("Evaluating question number " + question.getNumber());
             switch(question.getType()) {
                 case CHOOSE_ANSWER:
-                    question.setResponse(evaluateQuestionChooseAnswer((QuestionChooseAnswer)question));
+                    question = evaluateQuestionChooseAnswer((QuestionChooseAnswer)question);
                     break;
                 case WRITE_ANSWER:
-                    question.setResponse(evaluateQuestionWriteAnswer((QuestionWriteAnswer) question));
+                    question = evaluateQuestionWriteAnswer((QuestionWriteAnswer) question);
                     break;
                 case WRITE_CODE:
-                    evaluateQuestionWriteCode((QuestionWriteCode) question);
+                    question = evaluateQuestionWriteCode((QuestionWriteCode) question);
                     break;
             }
             evaluatedQuestions.add(question);
@@ -50,26 +50,22 @@ public class EvaluatorServiceImpl implements EvaluatorService {
     }
 
     @Override
-    public Response evaluateQuestionChooseAnswer(QuestionChooseAnswer question) {
+    public QuestionChooseAnswer evaluateQuestionChooseAnswer(QuestionChooseAnswer question) {
 
-        logger.info("Question type: " + question.getType());
-        Response response = new Response();
+        /*logger.info("Question type: " + question.getType());
 
-        Double score = 0d;
-        if(question.getCorrectAnswer() == question.getUserAnswer()) {
-            score = 1d;
-        }
+        for (Answer answer:question.getAnswers()) {
+            if(question.getCandidateAnswerText())
+        }*/
 
-        response.setMessage("Succesful evaluated");
-        response.setScore(score);
-        return response;
+        return question;
 
     }
 
     @Override
-    public Response evaluateQuestionWriteAnswer(QuestionWriteAnswer question) {
+    public QuestionWriteAnswer evaluateQuestionWriteAnswer(QuestionWriteAnswer question) {
 
-        logger.info("Question type: " + question.getType());
+        /*logger.info("Question type: " + question.getType());
         Response response = new Response();
 
         double totalKeyWords = question.getKeywords().size();
@@ -82,82 +78,16 @@ public class EvaluatorServiceImpl implements EvaluatorService {
         }
 
         response.setMessage("Succesful evaluated");
-        response.setScore((double) (currentMatched / totalKeyWords));
+        response.setScore((double) (currentMatched / totalKeyWords));*/
 
-        return response;
+        return question;
     }
 
     @Override
-    public Response evaluateQuestionWriteCode(QuestionWriteCode question) {
-
-        logger.info("Question type: " + question.getType());
-        Response response = new Response();
-
-        Process process = null;
-        BufferedReader bufferedReader = null;
-        BufferedReader errorReader = null;
-        String filePath = question.getUserAnswerFile().getPath();
-        String fileName = question.getUserAnswerFile().getName();
-
-        try {
-            logger.info("Compiling...");
-            process = Runtime.getRuntime().exec("javac " + filePath);
-
-        } catch (IOException e) {
-            logger.error("Error when compiling " + filePath);
-            errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            try {
-                response.setMessage(errorReader.readLine());
-                logger.error(response.getMessage());
-            } catch (IOException e1) {
-                response.setMessage("Failed to collect error.");
-                logger.error(response.getMessage());
-                e1.printStackTrace();
-            }
-
-            response.setScore(0d);
-            e.printStackTrace();
-            return response;
-        }
-
-        try {
-            String executableScript = "java " + filePath;
-
-            //Eliminate .java
-            process = Runtime.getRuntime().exec("copy " + filePath);
-            process = Runtime.getRuntime().exec(fileName);
-        } catch (IOException e) {
-            logger.error("Error when running " + filePath);
-            errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            try {
-                response.setMessage(errorReader.readLine());
-                logger.error(response.getMessage());
-            } catch (IOException e1) {
-                response.setMessage("Failed to collect error.");
-                logger.error(response.getMessage());
-                e1.printStackTrace();
-            }
-
-            e.printStackTrace();
-            response.setScore(0d);
-            return response;
-        }
-
-        bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        try {
-            response.setMessage(bufferedReader.readLine());
-            logger.info(response.getMessage());
-            if(question.getExpectedOutput().equals(response.getMessage())) {
-                response.setScore(1d);
-            }
-        } catch (IOException e) {
-            response.setMessage("Failed to collect error");
-            e.printStackTrace();
-        }
-
-        return response;
-
+    public QuestionWriteCode evaluateQuestionWriteCode(QuestionWriteCode question) {
+        return question;
     }
+
 
     @Override
     public String evaluateQuestionWriteCode(String answerCode) throws IOException {
