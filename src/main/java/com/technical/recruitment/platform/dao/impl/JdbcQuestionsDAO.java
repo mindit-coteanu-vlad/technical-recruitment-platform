@@ -26,14 +26,16 @@ public class JdbcQuestionsDAO implements QuestionsDAO {
 
     @Override
     public List<Question> getAllQuestionsByInterviewId(Integer interviewId) {
-        String sqlSelect = "SELECT   " +
-                "interviews.ID,  " +
-                "    interviews.START_DATE,  " +
-                "    status.STATUS_DE  " +
-                "FROM technical_recruitment_platform_db.interviews interviews    " +
-                "INNER JOIN technical_recruitment_platform_db.INTERVIEW_STATUS status        " +
-                "ON status.STATUS_ID = interviews.STATUS_ID        " +
-                "WHERE interviews.USER_ID = :userId";
+        String sqlSelect = "SELECT             " +
+                "questions.QUESTION_ID,   " +
+                "    questions.QUESTION_TITLE,   " +
+                "    question_types.TYPE_DE   " +
+                "FROM technical_recruitment_platform_db.INTERVIEW_QUESTIONS interview_questions   " +
+                "INNER JOIN technical_recruitment_platform_db.questions   " +
+                "ON questions.QUESTION_ID = interview_questions.QUESTION_ID   " +
+                "INNER JOIN technical_recruitment_platform_db.question_types question_types   " +
+                "ON question_types.TYPE_ID = questions.QUESTION_TYPE   " +
+                "WHERE interview_questions.INTERVIEW_ID = :interviewId; ";
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("interviewId", interviewId);
