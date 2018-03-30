@@ -1,11 +1,21 @@
 package com.technical.recruitment.platform.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Interview {
 
     private int id;
     private List<Question> questionList;
+    private Date interviewDate;
+
+    public Date getInterviewDate() {
+        return interviewDate;
+    }
+
+    public void setInterviewDate(Date interviewDate) {
+        this.interviewDate = interviewDate;
+    }
 
     public int getId() {
         return id;
