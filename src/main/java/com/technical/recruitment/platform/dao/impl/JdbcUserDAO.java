@@ -23,16 +23,21 @@ public class JdbcUserDAO implements UserDAO {
     public Optional<UserDTO> getUserByToken(String userToken) {
 
         String sqlSelect = "" +
-                "SELECT " +
-                "   users.USER_ID " +
-                "   users.USER_TOKEN, " +
-                "   users.USER_NAME, " +
-                "   users.USER_PASSWORD," +
-                "   roles.ROLE_NAME " +
-                "FROM technical_recruitment_platform_db.USERS users " +
-                "INNER JOIN technical_recruitment_platform_db.USER_ROLES roles " +
+                "SELECT     " +
+                "   users.USER_ID, " +
+                "   users.USER_TOKEN,     " +
+                "   users.USER_NAME,     " +
+                "   users.USER_PASSWORD,    " +
+                "   roles.ROLE_NAME, " +
+                "   status.STATUS_DE " +
+                "FROM technical_recruitment_platform_db.USERS users     " +
+                "INNER JOIN technical_recruitment_platform_db.USER_ROLES roles     " +
                 "   ON users.ROLE_ID = roles.ROLE_ID " +
-                "WHERE users.USER_TOKEN = :userToken ";
+                "INNER JOIN technical_recruitment_platform_db.interviews interviews " +
+                "   ON users.USER_ID = interviews.USER_ID " +
+                "INNER JOIN technical_recruitment_platform_db.INTERVIEW_STATUS status " +
+                "   ON status.STATUS_ID = interviews.STATUS_ID " +
+                "WHERE users.USER_TOKEN = :userToken";
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("userToken", userToken);
@@ -56,6 +61,7 @@ public class JdbcUserDAO implements UserDAO {
             user.setUserPassword(rs.getString("USER_PASSWORD"));
             user.setUserToken(rs.getString("USER_TOKEN"));
             user.setUserRole(rs.getString("ROLE_NAME"));
+            user.setInterviewStatus(rs.getString("INTERVIEW_STATUS"));
             return user;
         }
     }

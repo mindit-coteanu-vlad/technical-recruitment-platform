@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS technical_recruitment_platform_db.INTERVEWS(
+CREATE TABLE IF NOT EXISTS technical_recruitment_platform_db.INTERVIEWS(
 
     ID int PRIMARY KEY auto_increment,
     START_DATE datetime,

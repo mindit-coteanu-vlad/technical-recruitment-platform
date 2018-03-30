@@ -1,8 +1,6 @@
 package com.technical.recruitment.platform.dto;
 
 
-import com.technical.recruitment.platform.util.InterviewStatus;
-
 public class UserDTO {
 
     private int id;
@@ -10,13 +8,13 @@ public class UserDTO {
     private String userName;
     private String userPassword;
     private String userRole;
-    private InterviewStatus interviewStatus;
+    private String interviewStatus;
 
-    public InterviewStatus getInterviewStatus() {
+    public String getInterviewStatus() {
         return interviewStatus;
     }
 
-    public void setInterviewStatus(InterviewStatus interviewStatus) {
+    public void setInterviewStatus(String interviewStatus) {
         this.interviewStatus = interviewStatus;
     }
 
