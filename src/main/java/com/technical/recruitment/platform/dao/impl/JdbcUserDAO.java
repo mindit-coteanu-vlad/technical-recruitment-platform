@@ -61,7 +61,7 @@ public class JdbcUserDAO implements UserDAO {
             user.setUserPassword(rs.getString("USER_PASSWORD"));
             user.setUserToken(rs.getString("USER_TOKEN"));
             user.setUserRole(rs.getString("ROLE_NAME"));
-            user.setInterviewStatus(rs.getString("INTERVIEW_STATUS"));
+            user.setInterviewStatus(rs.getString("STATUS_DE"));
             return user;
         }
     }

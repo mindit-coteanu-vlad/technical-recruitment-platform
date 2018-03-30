@@ -18,7 +18,7 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value="/loginCandidate", method = RequestMethod.GET)
-    public ResponseEntity login(@PathVariable(value = "user-code") String userCode) {
+    public ResponseEntity login(@RequestParam(value = "userCode") String userCode) {
 
         Optional<UserDTO> optional = userService.getUserByToken(userCode);
         UserDTO userDTO = null;
