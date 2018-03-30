@@ -4,7 +4,7 @@ import com.technical.recruitment.platform.model.Response;
 import com.technical.recruitment.platform.model.questionTypes.QuestionChooseAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteCode;
-import com.technical.recruitment.platform.service.Evaluator;
+import com.technical.recruitment.platform.service.EvaluatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +14,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Controller
 public class Test {
 
     @Autowired
-    private Evaluator evaluator;
-
+    private EvaluatorService evaluator;
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
     public void init() {

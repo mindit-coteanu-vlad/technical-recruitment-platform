@@ -7,14 +7,23 @@ public class Interview {
 
     private int id;
     private List<Question> questionList;
-    private Date interviewDate;
+    private Date interviewStartDate;
+    private String interviewStatus;
 
-    public Date getInterviewDate() {
-        return interviewDate;
+    public String getInterviewStatus() {
+        return interviewStatus;
     }
 
-    public void setInterviewDate(Date interviewDate) {
-        this.interviewDate = interviewDate;
+    public void setInterviewStatus(String interviewStatus) {
+        this.interviewStatus = interviewStatus;
+    }
+
+    public Date getInterviewStartDate() {
+        return interviewStartDate;
+    }
+
+    public void setInterviewStartDate(Date interviewStartDate) {
+        this.interviewStartDate = interviewStartDate;
     }
 
     public int getId() {
