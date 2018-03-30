@@ -6,24 +6,20 @@ import com.technical.recruitment.platform.model.Response;
 import com.technical.recruitment.platform.model.questionTypes.QuestionChooseAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteCode;
-import com.technical.recruitment.platform.service.Evaluator;
+import com.technical.recruitment.platform.service.EvaluatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.security.MessageDigest;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EvaluatorImpl implements Evaluator {
+public class EvaluatorServiceImpl implements EvaluatorService {
 
-    private static final Logger logger = LoggerFactory.getLogger(EvaluatorImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(EvaluatorServiceImpl.class);
 
     @Value("${absoluteJDKPath}")
     private String absoluteJDKPath;
@@ -33,7 +29,7 @@ public class EvaluatorImpl implements Evaluator {
 
         logger.info("Starting evaluating the interview...");
         List<Question> evaluatedQuestions = new ArrayList<>();
-        
+
         for (Question question : interview.getQuestionList()) {
             logger.info("Evaluating question number " + question.getNumber());
             switch(question.getType()) {
@@ -159,6 +155,48 @@ public class EvaluatorImpl implements Evaluator {
             e.printStackTrace();
         }
 
+        return response;
+
+    }
+
+    @Override
+    public String evaluateQuestionWriteCode(String answerCode) throws IOException {
+
+        logger.info("Evaluate question");
+        Process process = null;
+        BufferedWriter writer = null;
+        File tempFile = null;
+        BufferedReader errorReader = null;
+        String response = "";
+        String sCurrentLine = "";
+
+        try {
+            tempFile = new File("temp/HelloWorld.java");
+
+            writer = new BufferedWriter(new FileWriter(tempFile));
+            writer.write(answerCode);
+            logger.info("Uploaded file successfully " + tempFile.getCanonicalPath());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("Error on writing the java file ");
+        } finally {
+            try {
+                // Close the writer regardless of what happens
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
+
+        Runtime.getRuntime().exec("temp/exec.bat");
+
+        try (
+            BufferedReader br = new BufferedReader(new FileReader("temp/output.txt"))) {
+            while ((sCurrentLine = br.readLine()) != null) {
+                response += sCurrentLine + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return response;
 
     }
