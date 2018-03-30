@@ -5,9 +5,13 @@ import com.technical.recruitment.platform.model.questionTypes.QuestionChooseAnsw
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteCode;
 import com.technical.recruitment.platform.service.Evaluator;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -49,5 +53,7 @@ public class Test {
         Response response2 = evaluator.evaluateQuestionWriteAnswer(questionWriteAnswer);
         Response response3 = evaluator.evaluateQuestionWriteCode(questionWriteCode);
     }
+
+
 
 }
