@@ -15,7 +15,6 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/trp")
-@CrossOrigin
 public class LoginController {
 
     private Logger LOGGER = LoggerFactory.getLogger(LoginController.class);

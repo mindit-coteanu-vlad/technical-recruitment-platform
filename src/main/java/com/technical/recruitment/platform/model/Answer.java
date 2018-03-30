@@ -5,8 +5,17 @@ public class Answer {
     private int id;
     private int idQuestion;
     private String label;
+    private String keyWords;
     private boolean isCorrect;
     private boolean checked;
+
+    public String getKeyWords() {
+        return keyWords;
+    }
+
+    public void setKeyWords(String keyWords) {
+        this.keyWords = keyWords;
+    }
 
     public boolean isChecked() {
         return checked;
