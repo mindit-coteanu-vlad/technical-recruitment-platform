@@ -1,7 +1,5 @@
 package com.technical.recruitment.platform.main;
 
-import org.flywaydb.core.Flyway;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,14 +13,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 @ComponentScan({"com.technical.recruitment.platform"})
 @EnableJpaRepositories("com.technical.recruitment.platform.repository")
-@EntityScan(basePackages = {"com.technical.recruitment.platform.model"})
+@EntityScan({"com.technical.recruitment.platform"})
+@ComponentScan({"com.technical.recruitment.platform"})
 @EnableScheduling
 @Configuration
-public class TechncalRecruitmentPlatformApplication {
+public class TechnicalRecruitmentPlatformApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(TechncalRecruitmentPlatformApplication.class, args);
+        SpringApplication.run(TechnicalRecruitmentPlatformApplication.class, args);
     }
 
 }

@@ -5,13 +5,8 @@ import com.technical.recruitment.platform.model.questionTypes.QuestionChooseAnsw
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteAnswer;
 import com.technical.recruitment.platform.model.questionTypes.QuestionWriteCode;
 import com.technical.recruitment.platform.service.Evaluator;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,11 +14,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 public class Test {
 
     @Autowired
     private Evaluator evaluator;
+
 
     @RequestMapping(value="/test", method = RequestMethod.GET)
     public void init() {

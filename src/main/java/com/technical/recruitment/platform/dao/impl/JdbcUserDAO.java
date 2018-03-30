@@ -1,7 +1,7 @@
-package com.technical.recruitment.platform.security.dao.impl;
+package com.technical.recruitment.platform.dao.impl;
 
-import com.technical.recruitment.platform.security.dao.UserDAO;
-import com.technical.recruitment.platform.security.dto.UserDTO;
+import com.technical.recruitment.platform.dao.UserDAO;
+import com.technical.recruitment.platform.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,20 +20,22 @@ public class JdbcUserDAO implements UserDAO {
     NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public Optional<UserDTO> getUserByUserName(String username) {
+    public Optional<UserDTO> getUserByToken(String userToken) {
 
         String sqlSelect = "" +
                 "SELECT " +
+                "   users.USER_ID " +
+                "   users.USER_TOKEN, " +
                 "   users.USER_NAME, " +
                 "   users.USER_PASSWORD," +
                 "   roles.ROLE_NAME " +
                 "FROM technical_recruitment_platform_db.USERS users " +
                 "INNER JOIN technical_recruitment_platform_db.USER_ROLES roles " +
                 "   ON users.ROLE_ID = roles.ROLE_ID " +
-                "WHERE users.USER_NAME = :username ";
+                "WHERE users.USER_TOKEN = :userToken ";
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("username", username);
+        namedParameters.addValue("userToken", userToken);
 
         UserDTO userDTO = null;
         try {
@@ -49,8 +51,10 @@ public class JdbcUserDAO implements UserDAO {
         @Override
         public UserDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
             UserDTO user = new UserDTO();
+            user.setId(rs.getInt("USER_ID"));
             user.setUserName(rs.getString("USER_NAME"));
-            user.setPassword(rs.getString("USER_PASSWORD"));
+            user.setUserPassword(rs.getString("USER_PASSWORD"));
+            user.setUserToken(rs.getString("USER_TOKEN"));
             user.setUserRole(rs.getString("ROLE_NAME"));
             return user;
         }
