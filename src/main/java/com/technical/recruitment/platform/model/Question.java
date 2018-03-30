@@ -7,15 +7,12 @@ import java.util.List;
 public abstract class Question {
 
     private int id;
-    private int number;
     private String title;
     private QuestionType type;
     private String candidateAnswerText;
     private String technicalReview;
     private boolean evaluatorScore;
     private boolean technicalScore;
-    private boolean submitted;
-    private boolean status;
     private List<Answer> answers;
 
     public List<Answer> getAnswers() {
@@ -48,30 +45,6 @@ public abstract class Question {
 
     public void setTechnicalScore(boolean technicalScore) {
         this.technicalScore = technicalScore;
-    }
-
-    public boolean isSubmitted() {
-        return submitted;
-    }
-
-    public void setSubmitted(boolean submitted) {
-        this.submitted = submitted;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getCandidateAnswerText() {

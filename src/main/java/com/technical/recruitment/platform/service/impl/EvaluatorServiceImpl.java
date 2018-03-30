@@ -31,7 +31,6 @@ public class EvaluatorServiceImpl implements EvaluatorService {
         List<Question> evaluatedQuestions = new ArrayList<>();
 
         for (Question question : interview.getQuestionList()) {
-            logger.info("Evaluating question number " + question.getNumber());
             switch(question.getType()) {
                 case CHOOSE_ANSWER:
                     question = evaluateQuestionChooseAnswer((QuestionChooseAnswer)question);
