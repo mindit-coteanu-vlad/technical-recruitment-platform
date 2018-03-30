@@ -2,6 +2,8 @@ package com.technical.recruitment.platform.controller;
 
 import com.technical.recruitment.platform.dto.UserDTO;
 import com.technical.recruitment.platform.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/trp")
+@CrossOrigin
 public class LoginController {
+
+    private Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;
@@ -20,15 +25,12 @@ public class LoginController {
     @RequestMapping(value="/loginCandidate", method = RequestMethod.GET)
     public ResponseEntity login(@RequestParam(value = "userCode") String userCode) {
 
-        Optional<UserDTO> optional = userService.getUserByToken(userCode);
-        UserDTO userDTO = null;
-        if(optional.isPresent()) {
-            userDTO = optional.get();
-        } else {
-            return new ResponseEntity("USER_NOT_FOUND", HttpStatus.NOT_ACCEPTABLE);
-        }
-        return new ResponseEntity(userDTO.getInterviewStatus(), HttpStatus.ACCEPTED);
-
+        return userService.getUserByToken(userCode)
+                .map(userDTO -> {
+                    LOGGER.info("Successfully retrieved user data for user {}, data={}", userCode, userDTO);
+                    return new ResponseEntity<>(userDTO, HttpStatus.OK);
+                })
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }
