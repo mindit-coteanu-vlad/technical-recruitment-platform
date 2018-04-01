@@ -12,6 +12,7 @@ USE technical_recruitment_platform_db;
             ANSWER_ID INT AUTO_INCREMENT,
 			QUESTION_ID INT NOT NULL,
 			ANSWER_DE TEXT NOT NULL,
+      CORRECT INT,
 			PRIMARY KEY (ANSWER_ID)
 
         );

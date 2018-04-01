@@ -19,7 +19,7 @@ public class InterviewController {
     InterviewService interviewService;
 
     @RequestMapping(value= "/getInterview", method = RequestMethod.GET)
-    public ResponseEntity getInterview(@RequestParam Integer userId) {
+    public ResponseEntity getInterview(@RequestParam(value="userId") Integer userId) {
 
         return new ResponseEntity(interviewService.getInterviewWithQuestions(userId), HttpStatus.ACCEPTED);
 

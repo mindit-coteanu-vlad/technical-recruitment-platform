@@ -68,7 +68,7 @@ public class JdbcQuestionsDAO implements QuestionsDAO {
                 }
 
                 question.setId(rs.getInt("QUESTION_ID"));
-                question.setTitle("QUESTION_TITLE");
+                question.setTitle(rs.getString("QUESTION_TITLE"));
                 results.add(question);
             }
             return results;
