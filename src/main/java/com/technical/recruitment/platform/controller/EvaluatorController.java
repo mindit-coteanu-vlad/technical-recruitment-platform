@@ -1,5 +1,6 @@
 package com.technical.recruitment.platform.controller;
 
+import com.technical.recruitment.platform.model.OutputCode;
 import com.technical.recruitment.platform.service.EvaluatorService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,7 +39,8 @@ public class EvaluatorController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         String response = evaluatorService.evaluateQuestionWriteCode(code);
-        return new ResponseEntity(response, HttpStatus.OK);
+        OutputCode outputCode = new OutputCode(response);
+        return new ResponseEntity(outputCode, HttpStatus.OK);
 
     }
 

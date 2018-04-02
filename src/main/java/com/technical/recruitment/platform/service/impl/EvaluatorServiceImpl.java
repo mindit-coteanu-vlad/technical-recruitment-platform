@@ -118,6 +118,12 @@ public class EvaluatorServiceImpl implements EvaluatorService {
 
         Runtime.getRuntime().exec("temp/exec.bat");
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         try (
             BufferedReader br = new BufferedReader(new FileReader("temp/output.txt"))) {
             while ((sCurrentLine = br.readLine()) != null) {
